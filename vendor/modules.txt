@@ -222,7 +222,7 @@ github.com/ttlv/common_utils/logrus
 github.com/ttlv/common_utils/readonly
 github.com/ttlv/common_utils/testingtool
 github.com/ttlv/common_utils/utils
-# github.com/yosssi/gohtml v0.0.0-20200512035251-dd92a3e0d30d
+# github.com/yosssi/gohtml v0.0.0-20200519115854-476f5b4b8047
 ## explicit
 # golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8
 golang.org/x/image/bmp
