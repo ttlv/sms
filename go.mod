@@ -6,7 +6,6 @@ require (
 	github.com/PuerkitoBio/goquery v1.5.1 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535 // indirect
 	github.com/aws/aws-sdk-go v1.31.3
-	github.com/ddliu/go-httpclient v0.6.6 // indirect
 	github.com/disintegration/imaging v1.6.2 // indirect
 	github.com/fatih/color v1.9.0
 	github.com/go-chi/chi v4.1.1+incompatible
@@ -49,7 +48,7 @@ require (
 	github.com/tidwall/gjson v1.6.0
 	github.com/ttacon/builder v0.0.0-20170518171403-c099f663e1c2 // indirect
 	github.com/ttacon/libphonenumber v1.1.0
-	github.com/ttlv/common_utils v0.0.0-20200520004755-b55bf0fd169f
+	github.com/ttlv/common_utils v0.0.0-20200522002802-dead109ba46b
 	github.com/yosssi/gohtml v0.0.0-20200512035251-dd92a3e0d30d // indirect
 	golang.org/x/net v0.0.0-20200520182314-0ba52f642ac2
 	google.golang.org/grpc v1.29.1
