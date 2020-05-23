@@ -1,6 +1,10 @@
 package action
 
 import (
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+
 	"github.com/gorilla/sessions"
 	"github.com/jinzhu/gorm"
 	"github.com/streadway/amqp"
@@ -10,7 +14,6 @@ import (
 	"github.com/ttlv/sms/queue/amqp_queue"
 	"github.com/ttlv/sms/server"
 	"github.com/ttlv/sms/service/producer_http/app/helpers"
-	"net/http"
 )
 
 type Handlers struct {
@@ -29,28 +32,36 @@ func (handler *Handlers) Send(w http.ResponseWriter, r *http.Request) {
 		smsServer internal.SmsServer
 		err       error
 		params    sms.SendParams
-		brand     = r.PostFormValue("brand")
-		phone     = r.PostFormValue("phone")
-		content   = r.PostFormValue("content")
 		b         = sms.SmsBrand{}
 		amount    = common_utils.Count{}
+		apiParams = sms.ApiParams{}
 	)
-	// 调用api之前再进行一次权限校验
-	if _, err := helpers.GetToken(r, handler.SessionStore); err != nil {
-		helpers.RenderFailureJSON(w, 400, err.Error())
-		return
-	}
 	if smsServer, err = server.New(handler.DB, amqp_queue.New(handler.AMQPConn, handler.Channel), []sms.SmsProvider{}); err != nil {
 		helpers.RenderFailureJSON(w, 400, err.Error())
 		return
 	}
-	if brand == "" {
+	requestBody, _ := ioutil.ReadAll(r.Body)
+	json.Unmarshal(requestBody, &apiParams)
+	if apiParams.Brand == "" {
 		helpers.RenderFailureJSON(w, 400, "未填写Brand")
 		return
 	}
-	handler.DB.First(&b, "name = ?", brand)
+	handler.DB.First(&b, "name = ?", apiParams.Brand)
 	if handler.DB.NewRecord(&b) {
 		helpers.RenderFailureJSON(w, 400, "无效brand")
+		return
+	}
+	// 调用api之前进行一次token校验
+	if _, err := helpers.GetToken(handler.DB, b.ID, r, handler.SessionStore); err != nil {
+		helpers.RenderFailureJSON(w, 400, err.Error())
+		return
+	}
+	if apiParams.Phone == "" {
+		helpers.RenderFailureJSON(w, 400, "未填写手机号码")
+		return
+	}
+	if apiParams.Content == "" {
+		helpers.RenderFailureJSON(w, 400, "未填写需要发送的内容")
 		return
 	}
 	// 判断该brand是否还有可用的短信条数
@@ -59,17 +70,9 @@ func (handler *Handlers) Send(w http.ResponseWriter, r *http.Request) {
 		helpers.RenderFailureJSON(w, 400, "您无可用的短信条数,请联系管理员充值.")
 		return
 	}
-	if phone == "" {
-		helpers.RenderFailureJSON(w, 400, "未填写手机号码")
-		return
-	}
-	if content == "" {
-		helpers.RenderFailureJSON(w, 400, "未填写需要发送的内容")
-		return
-	}
-	params.Brand = brand
-	params.Phone = phone
-	params.Content = content
+	params.Brand = apiParams.Brand
+	params.Phone = apiParams.Phone
+	params.Content = apiParams.Content
 	if err = smsServer.HttpSend(&params); err != nil {
 		helpers.RenderFailureJSON(w, 400, err.Error())
 		return

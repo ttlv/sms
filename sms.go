@@ -67,6 +67,7 @@ type SmsFailureRecord struct {
 type SmsBrand struct {
 	ID                 uint `gorm:"primary_key"`
 	Name               string
+	Token              string
 	TwilioAccountsID   string
 	TwilioAuthToken    string
 	TwilioSendNumber   string

@@ -32,5 +32,4 @@ func main() {
 
 	log.Printf("========== Visit http://localhost%v ==========\n", cfg.Port)
 	log.Fatal(http.ListenAndServe(cfg.Port, handler))
-
 }

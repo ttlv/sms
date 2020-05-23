@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/ttlv/common_utils"
+	"sync"
 
 	"github.com/jinzhu/gorm"
 	"github.com/ttacon/libphonenumber"
@@ -17,6 +18,7 @@ type SmsServer struct {
 	Providers []sms.SmsProvider
 	Queue     sms.SmsQueue
 	DB        *gorm.DB
+	Lock      sync.Mutex
 }
 
 func New(db *gorm.DB, queue sms.SmsQueue, providers []sms.SmsProvider) (serv SmsServer, err error) {
@@ -29,6 +31,7 @@ func (ser SmsServer) HttpSend(params *sms.SendParams) (err error) {
 		number        string
 		brand         = sms.SmsBrand{}
 		availaleCount = common_utils.Count{}
+		availables    []sms.SmsAvailable
 	)
 	_, number, err = ser.parsePhoneNumber(params)
 	rawParamByte, _ := json.Marshal(params)
@@ -36,7 +39,7 @@ func (ser SmsServer) HttpSend(params *sms.SendParams) (err error) {
 	if err == nil {
 		// 再次判断短信的可用条数是否大于0
 		ser.DB.First(&brand, "name = ?", params.Brand)
-		ser.DB.Raw(`SELECT SUM(available_amount) AS value FROM sms_availables WHERE sms_brand_id = ?`, brand.ID).Scan(&availaleCount)
+		ser.DB.Raw(`SELECT SUM(available_amount) AS value FROM sms_availables WHERE sms_brand_id = ? and available_amount > 0`, brand.ID).Scan(&availaleCount)
 		if availaleCount.Value <= 0 {
 			return fmt.Errorf("短信可用余额不足请充值")
 		}
@@ -54,7 +57,16 @@ func (ser SmsServer) HttpSend(params *sms.SendParams) (err error) {
 		} else {
 			ser.Queue.Publish(&sms.PublishData{SmsRecordId: smsRecord.ID, SendParams: params})
 		}
-		ser.DB.Exec("UPDATE sms_availables SET available_amount = available_amount - 1 WHERE sms_brand_id = ?", brand.ID)
+		ser.DB.Find(&availables, "sms_brand_id = ? and available_amount > 0", brand.ID)
+		for index, available := range availables {
+			if index == 0 {
+				ser.Lock.Lock()
+				available.AvailableAmount -= 1
+				ser.Lock.Unlock()
+				ser.DB.Save(&available)
+				break
+			}
+		}
 	} else {
 		smsRecordData := sms.SmsRecord{
 			Phone:    number,

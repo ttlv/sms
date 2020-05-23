@@ -1,12 +1,10 @@
 # github.com/BurntSushi/toml v0.3.1
 github.com/BurntSushi/toml
 # github.com/PuerkitoBio/goquery v1.5.1
-## explicit
 github.com/PuerkitoBio/goquery
 # github.com/andybalholm/cascadia v1.1.0
 github.com/andybalholm/cascadia
 # github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535
-## explicit
 github.com/asaskevich/govalidator
 # github.com/aws/aws-sdk-go v1.31.3
 ## explicit
@@ -46,8 +44,6 @@ github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil
 github.com/aws/aws-sdk-go/service/sns
 github.com/aws/aws-sdk-go/service/sts
 github.com/aws/aws-sdk-go/service/sts/stsiface
-# github.com/disintegration/imaging v1.6.2
-## explicit
 # github.com/fatih/color v1.9.0
 ## explicit
 github.com/fatih/color
@@ -56,7 +52,6 @@ github.com/fatih/color
 github.com/go-chi/chi
 github.com/go-chi/chi/middleware
 # github.com/go-redis/redis v6.15.8+incompatible
-## explicit
 github.com/go-redis/redis
 github.com/go-redis/redis/internal
 github.com/go-redis/redis/internal/consistenthash
@@ -77,7 +72,6 @@ github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
 # github.com/gorilla/context v1.1.1
-## explicit
 github.com/gorilla/context
 # github.com/gorilla/mux v1.7.4
 ## explicit
@@ -88,7 +82,6 @@ github.com/gorilla/securecookie
 ## explicit
 github.com/gorilla/sessions
 # github.com/gosimple/slug v1.9.0
-## explicit
 github.com/gosimple/slug
 # github.com/grpc-ecosystem/go-grpc-middleware v1.2.0
 ## explicit
@@ -118,45 +111,31 @@ github.com/mattn/go-colorable
 # github.com/mattn/go-isatty v0.0.11
 github.com/mattn/go-isatty
 # github.com/microcosm-cc/bluemonday v1.0.2
-## explicit
 github.com/microcosm-cc/bluemonday
-# github.com/onsi/ginkgo v1.12.2
-## explicit
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
 # github.com/qor/admin v0.0.0-20200315024928-877b98a68a6f
 ## explicit
 github.com/qor/admin
 # github.com/qor/assetfs v0.0.0-20170713023933-ff57fdc13a14
-## explicit
 github.com/qor/assetfs
-# github.com/qor/media v0.0.0-20191022071353-19cf289e17d4
-## explicit
 # github.com/qor/middlewares v0.0.0-20170822143614-781378b69454
-## explicit
 github.com/qor/middlewares
-# github.com/qor/oss v0.0.0-20191031055114-aef9ba66bf76
-## explicit
 # github.com/qor/qor v0.0.0-20200224122013-457d2e3f50e1
 ## explicit
 github.com/qor/qor
 github.com/qor/qor/resource
 github.com/qor/qor/utils
 # github.com/qor/responder v0.0.0-20171031032654-b6def473574f
-## explicit
 github.com/qor/responder
 # github.com/qor/roles v0.0.0-20171127035124-d6375609fe3e
 ## explicit
 github.com/qor/roles
-# github.com/qor/serializable_meta v0.0.0-20180510060738-5fd8542db417
-## explicit
 # github.com/qor/session v0.0.0-20170907035918-8206b0adab70
-## explicit
 github.com/qor/session
 github.com/qor/session/gorilla
 github.com/qor/session/manager
 # github.com/qor/validations v0.0.0-20171228122639-f364bca61b46
-## explicit
 github.com/qor/validations
 # github.com/rainycape/unidecode v0.0.0-20150907023854-cb7f23ec59be
 github.com/rainycape/unidecode
@@ -176,10 +155,7 @@ github.com/streadway/amqp
 ## explicit
 github.com/subosito/twilio
 # github.com/theplant/cldr v0.0.0-20190423050709-9f76f7ce4ee8
-## explicit
 github.com/theplant/cldr
-# github.com/theplant/htmltestingutils v0.0.0-20190423050759-0e06de7b6967
-## explicit
 # github.com/theplant/testingutils v0.0.0-20190603093022-26d8b4d95c61
 ## explicit
 github.com/theplant/testingutils
@@ -196,7 +172,7 @@ github.com/ttacon/builder
 # github.com/ttacon/libphonenumber v1.1.0
 ## explicit
 github.com/ttacon/libphonenumber
-# github.com/ttlv/common_utils v0.0.0-20200522002802-dead109ba46b
+# github.com/ttlv/common_utils v0.0.0-20200523040620-b3352dd2581f
 ## explicit
 github.com/ttlv/common_utils
 github.com/ttlv/common_utils/health_checker
@@ -204,8 +180,6 @@ github.com/ttlv/common_utils/logrus
 github.com/ttlv/common_utils/readonly
 github.com/ttlv/common_utils/testingtool
 github.com/ttlv/common_utils/utils
-# github.com/yosssi/gohtml v0.0.0-20200519115854-476f5b4b8047
-## explicit
 # golang.org/x/net v0.0.0-20200520182314-0ba52f642ac2
 ## explicit
 golang.org/x/net/context

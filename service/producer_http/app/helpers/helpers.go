@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/sessions"
+	"github.com/jinzhu/gorm"
+	"github.com/ttlv/sms"
 	"github.com/ttlv/sms/service/producer_http/app/entries"
 	"net/http"
 )
@@ -27,13 +29,22 @@ func RenderSuccessJSON(w http.ResponseWriter, data interface{}) {
 	w.Write(result)
 }
 
-func GetToken(r *http.Request, sessionStore *sessions.CookieStore) (string, error) {
+func GetToken(db *gorm.DB, brandID uint, r *http.Request, sessionStore *sessions.CookieStore) (string, error) {
+	var (
+		smsBrand    = sms.SmsBrand{}
+		accessToken string
+		ok          bool
+	)
 	session, err := sessionStore.Get(r, "sms_service")
 	if err != nil {
 		return "", err
 	}
-	if accessToken, ok := session.Values["token"].(string); ok {
-		return accessToken, nil
+	if accessToken, ok = session.Values["token"].(string); ok {
+		// 从db中对比token是否正确
+		db.First(&smsBrand, "id = ?", brandID)
+		if !db.NewRecord(&smsBrand) && smsBrand.Token == accessToken {
+			return accessToken, nil
+		}
 	}
 	return "", fmt.Errorf("未发现token,无法调用服务。")
 }
