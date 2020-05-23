@@ -3,7 +3,7 @@ module github.com/ttlv/sms
 go 1.14
 
 require (
-	github.com/aws/aws-sdk-go v1.31.3
+	github.com/aws/aws-sdk-go v1.31.4
 	github.com/fatih/color v1.9.0
 	github.com/go-chi/chi v4.1.1+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
@@ -18,9 +18,9 @@ require (
 	github.com/qor/roles v0.0.0-20171127035124-d6375609fe3e
 	github.com/robfig/cron v1.2.0
 	github.com/rs/cors v1.7.0
+	github.com/sfreiberg/gotwilio v0.0.0-20200424172909-47a95c1c632a
 	github.com/sirupsen/logrus v1.6.0
 	github.com/streadway/amqp v0.0.0-20200108173154-1c71cc93ed71
-	github.com/subosito/twilio v0.0.1
 	github.com/theplant/testingutils v0.0.0-20190603093022-26d8b4d95c61
 	github.com/tidwall/gjson v1.6.0
 	github.com/ttacon/builder v0.0.0-20170518171403-c099f663e1c2 // indirect

@@ -102,7 +102,7 @@ type SmsAvailable struct {
 	SmsBranID       uint
 	SmsBrand        SmsBrand `gorm:"foreignkey:SmsBranID"`
 	AvailableAmount int64
-	Note            string `sql:"type:text`
+	Note            string
 	CreatedAt       time.Time
 	UpdatedAt       time.Time
 }

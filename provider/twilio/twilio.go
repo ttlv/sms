@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/jinzhu/gorm"
-	"github.com/subosito/twilio"
+	"github.com/sfreiberg/gotwilio"
 	"github.com/tidwall/gjson"
 	"github.com/ttlv/sms"
 	"github.com/ttlv/sms/config"
@@ -44,11 +44,8 @@ func (provider TwilioProvider) Send(params sms.SendParams) (string, string, erro
 	c := config.MustGetConfig()
 	brand := sms.SmsBrand{}
 	provider.DB.Where("name = ?", params.Brand).First(&brand)
-	SharedClient := twilio.NewClient(brand.TwilioAccountsID, brand.TwilioAuthToken, nil)
-	message, _, err := SharedClient.Messages.Send(brand.TwilioSendNumber, params.Phone, twilio.MessageParams{
-		Body:           params.Content,
-		StatusCallback: c.TwilioCallBack,
-	})
+	twilioClient := gotwilio.NewTwilioClient(brand.TwilioAccountsID, brand.TwilioAuthToken)
+	message, _, err := twilioClient.SendSMS(brand.TwilioSendNumber, params.Phone, params.Content, c.TwilioCallBack, "")
 	if err != nil {
 		return "", "", err
 	}

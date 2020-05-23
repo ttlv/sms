@@ -27,5 +27,6 @@ func New() *qor_admin.Admin {
 	configSmsFailureRecordRes(adm)
 	configBrandRes(adm)
 	configSmsSettingRes(adm)
+	configSmsAvailableRes(adm)
 	return adm
 }

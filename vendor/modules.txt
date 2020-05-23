@@ -6,7 +6,7 @@ github.com/PuerkitoBio/goquery
 github.com/andybalholm/cascadia
 # github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535
 github.com/asaskevich/govalidator
-# github.com/aws/aws-sdk-go v1.31.3
+# github.com/aws/aws-sdk-go v1.31.4
 ## explicit
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/awserr
@@ -44,6 +44,8 @@ github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil
 github.com/aws/aws-sdk-go/service/sns
 github.com/aws/aws-sdk-go/service/sts
 github.com/aws/aws-sdk-go/service/sts/stsiface
+# github.com/dgrijalva/jwt-go v3.2.0+incompatible
+github.com/dgrijalva/jwt-go
 # github.com/fatih/color v1.9.0
 ## explicit
 github.com/fatih/color
@@ -71,11 +73,15 @@ github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
+# github.com/google/go-querystring v1.0.0
+github.com/google/go-querystring/query
 # github.com/gorilla/context v1.1.1
 github.com/gorilla/context
 # github.com/gorilla/mux v1.7.4
 ## explicit
 github.com/gorilla/mux
+# github.com/gorilla/schema v1.1.0
+github.com/gorilla/schema
 # github.com/gorilla/securecookie v1.1.1
 github.com/gorilla/securecookie
 # github.com/gorilla/sessions v1.2.0
@@ -145,15 +151,15 @@ github.com/robfig/cron
 # github.com/rs/cors v1.7.0
 ## explicit
 github.com/rs/cors
+# github.com/sfreiberg/gotwilio v0.0.0-20200424172909-47a95c1c632a
+## explicit
+github.com/sfreiberg/gotwilio
 # github.com/sirupsen/logrus v1.6.0
 ## explicit
 github.com/sirupsen/logrus
 # github.com/streadway/amqp v0.0.0-20200108173154-1c71cc93ed71
 ## explicit
 github.com/streadway/amqp
-# github.com/subosito/twilio v0.0.1
-## explicit
-github.com/subosito/twilio
 # github.com/theplant/cldr v0.0.0-20190423050709-9f76f7ce4ee8
 github.com/theplant/cldr
 # github.com/theplant/testingutils v0.0.0-20190603093022-26d8b4d95c61
