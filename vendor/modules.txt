@@ -48,7 +48,6 @@ github.com/aws/aws-sdk-go/service/sts
 github.com/aws/aws-sdk-go/service/sts/stsiface
 # github.com/disintegration/imaging v1.6.2
 ## explicit
-github.com/disintegration/imaging
 # github.com/fatih/color v1.9.0
 ## explicit
 github.com/fatih/color
@@ -131,23 +130,13 @@ github.com/qor/admin
 # github.com/qor/assetfs v0.0.0-20170713023933-ff57fdc13a14
 ## explicit
 github.com/qor/assetfs
-# github.com/qor/audited v0.0.0-20171228121055-b52c9c2f0571
-## explicit
-github.com/qor/audited
-# github.com/qor/l10n v0.0.0-20181031091737-2ca95fb3b4dd
-## explicit
-github.com/qor/l10n
 # github.com/qor/media v0.0.0-20191022071353-19cf289e17d4
 ## explicit
-github.com/qor/media
 # github.com/qor/middlewares v0.0.0-20170822143614-781378b69454
 ## explicit
 github.com/qor/middlewares
 # github.com/qor/oss v0.0.0-20191031055114-aef9ba66bf76
 ## explicit
-# github.com/qor/publish v0.0.0-20181014061411-abfbacee9e0d
-## explicit
-github.com/qor/publish
 # github.com/qor/qor v0.0.0-20200224122013-457d2e3f50e1
 ## explicit
 github.com/qor/qor
@@ -161,21 +150,14 @@ github.com/qor/responder
 github.com/qor/roles
 # github.com/qor/serializable_meta v0.0.0-20180510060738-5fd8542db417
 ## explicit
-github.com/qor/serializable_meta
 # github.com/qor/session v0.0.0-20170907035918-8206b0adab70
 ## explicit
 github.com/qor/session
 github.com/qor/session/gorilla
 github.com/qor/session/manager
-# github.com/qor/sorting v0.0.0-20200226160341-65007102872a
-## explicit
-github.com/qor/sorting
 # github.com/qor/validations v0.0.0-20171228122639-f364bca61b46
 ## explicit
 github.com/qor/validations
-# github.com/qor/worker v0.0.0-20190805090529-35a245417f70
-## explicit
-github.com/qor/worker
 # github.com/rainycape/unidecode v0.0.0-20150907023854-cb7f23ec59be
 github.com/rainycape/unidecode
 # github.com/robfig/cron v1.2.0
@@ -224,11 +206,6 @@ github.com/ttlv/common_utils/testingtool
 github.com/ttlv/common_utils/utils
 # github.com/yosssi/gohtml v0.0.0-20200519115854-476f5b4b8047
 ## explicit
-# golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8
-golang.org/x/image/bmp
-golang.org/x/image/ccitt
-golang.org/x/image/tiff
-golang.org/x/image/tiff/lzw
 # golang.org/x/net v0.0.0-20200520182314-0ba52f642ac2
 ## explicit
 golang.org/x/net/context

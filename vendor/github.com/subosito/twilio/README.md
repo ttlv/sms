@@ -1,8 +1,6 @@
 # Twilio
 
-[![Build Status](https://travis-ci.org/subosito/twilio.svg?branch=master)](https://travis-ci.org/subosito/twilio)
-[![Coverage Status](https://img.shields.io/codecov/c/github/subosito/twilio.svg)](https://codecov.io/gh/subosito/twilio)
-[![GoDoc](https://godoc.org/github.com/subosito/twilio?status.svg)](https://godoc.org/github.com/subosito/twilio)
+[![Build Status](https://travis-ci.org/subosito/twilio.png)](https://travis-ci.org/subosito/twilio)
 
 Simple Twilio API wrapper in Go.
 
@@ -20,43 +18,44 @@ Then you can use it on your application:
 package main
 
 import (
-	"log"
-	"net/url"
-
+	"fmt"
 	"github.com/subosito/twilio"
 )
 
-var (
-	AccountSid = "AC5ef8732a3c49700934481addd5ce1659"
-	AuthToken  = "2ecaf0108548e09a74387cbb28456aa2"
-)
-
 func main() {
+	// Common stuffs
+	AccountSid := "ac650108548e09aC2eed18ddb850c20b9"
+	AuthToken := "2ecaf74387cbb28456aad6fb57b5ad682"
+	from := "+15005550006"
+	to := "+62801234567"
+	callbackUrl := "http://subosito.com/"
+
 	// Initialize twilio client
-	c := twilio.NewClient(AccountSid, AuthToken, nil)
+	t := twilio.NewTwilio(AccountSid, AuthToken)
 
-	// You can set custom Client, eg: you're using `appengine/urlfetch` on Google's appengine
-	// a := appengine.NewContext(r) // r is a *http.Request
-	// f := urlfetch.Client(a)
-	// c := twilio.NewClient(AccountSid, AuthToken, f)
+	// You can set custom Transport, eg: you're using `appengine/urlfetch` on Google's appengine
+	// c := appengine.NewContext(r) // r is a *http.Request
+	// t.Transport = &urlfetch.Transport{Context: c}
 
-	// Send Message
-	params := twilio.MessageParams{
-		Body: "Hello Go!",
-	}
-	s, response, err := c.Messages.Send("+15005550006", "+62801234567", params)
+	// Send SMS
+	params := twilio.SMSParams{StatusCallback: callbackUrl}
+	s, err := t.SendSMS(from, to, "Hello Go!", params)
+
+	// or, make a voice call
+	// params := twilio.CallParams{Url: callbackUrl}
+	// s, err := t.MakeCall(from, to, params)
+
 	if err != nil {
-		log.Fatal(s, response, err)
+		fmt.Println(err)
+		return
 	}
 
-	// You can also using lower level function: Create
-	s, response, err = c.Messages.Create(url.Values{
-		"From": {"+15005550006"},
-		"To":   {"+62801234567"},
-		"Body": {"Hello Go!"},
-	})
-	if err != nil {
-		log.Fatal(s, response, err)
-	}
+	fmt.Printf("%+v\n", s)
+	return
 }
 ```
+
+## Resources
+
+Documentation: http://godoc.org/github.com/subosito/twilio
+

@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/sessions"
 	"github.com/jinzhu/gorm"
 	"github.com/streadway/amqp"
+	"github.com/ttlv/common_utils"
 	"github.com/ttlv/sms"
 	"github.com/ttlv/sms/internal"
 	"github.com/ttlv/sms/queue/amqp_queue"
@@ -31,6 +32,8 @@ func (handler *Handlers) Send(w http.ResponseWriter, r *http.Request) {
 		brand     = r.PostFormValue("brand")
 		phone     = r.PostFormValue("phone")
 		content   = r.PostFormValue("content")
+		b         = sms.SmsBrand{}
+		amount    = common_utils.Count{}
 	)
 	// 调用api之前再进行一次权限校验
 	if _, err := helpers.GetToken(r, handler.SessionStore); err != nil {
@@ -43,6 +46,17 @@ func (handler *Handlers) Send(w http.ResponseWriter, r *http.Request) {
 	}
 	if brand == "" {
 		helpers.RenderFailureJSON(w, 400, "未填写Brand")
+		return
+	}
+	handler.DB.First(&b, "name = ?", brand)
+	if handler.DB.NewRecord(&b) {
+		helpers.RenderFailureJSON(w, 400, "无效brand")
+		return
+	}
+	// 判断该brand是否还有可用的短信条数
+	handler.DB.Raw(`SELECT SUM(available_amount) AS value FROM sms_availables WHERE sms_brand_id = ?`, b.ID).Scan(&amount)
+	if amount.Value <= 0 {
+		helpers.RenderFailureJSON(w, 400, "您无可用的短信条数,请联系管理员充值.")
 		return
 	}
 	if phone == "" {

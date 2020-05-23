@@ -5,10 +5,6 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/gorilla/sessions"
 	"github.com/jinzhu/gorm"
-	"github.com/qor/l10n"
-	"github.com/qor/media"
-	"github.com/qor/sorting"
-	"github.com/qor/validations"
 	"github.com/streadway/amqp"
 	"github.com/ttlv/sms"
 	"github.com/ttlv/sms/config"
@@ -47,10 +43,6 @@ func New(db *gorm.DB, sessionStore *sessions.CookieStore) *chi.Mux {
 
 func SetDBCallback(db *gorm.DB) {
 	db.AutoMigrate(&sms.SmsRecord{}, &sms.SmsFailureRecord{}, &sms.SmsAvailable{})
-	l10n.RegisterCallbacks(db)
-	sorting.RegisterCallbacks(db)
-	validations.RegisterCallbacks(db)
-	media.RegisterCallbacks(db)
 }
 
 func Authentication(sessionStore *sessions.CookieStore) func(next http.Handler) http.Handler {
