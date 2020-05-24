@@ -77,4 +77,6 @@ func (handler *Handlers) Send(w http.ResponseWriter, r *http.Request) {
 		helpers.RenderFailureJSON(w, 400, err.Error())
 		return
 	}
+	helpers.RenderSuccessJSON(w, "发送成功")
+	return
 }

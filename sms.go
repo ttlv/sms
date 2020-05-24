@@ -108,9 +108,9 @@ type SmsAvailable struct {
 }
 
 type ApiParams struct {
-	Brand   string
-	Phone   string
-	Content string
+	Brand   string `json:"brand"`
+	Phone   string `json:"phone"`
+	Content string `json:"content"`
 }
 
 type HttpParam struct {

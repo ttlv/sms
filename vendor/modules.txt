@@ -112,30 +112,30 @@ github.com/jinzhu/now
 github.com/jmespath/go-jmespath
 # github.com/konsorten/go-windows-terminal-sequences v1.0.3
 github.com/konsorten/go-windows-terminal-sequences
+# github.com/kr/pretty v0.1.0
+## explicit
 # github.com/mattn/go-colorable v0.1.4
 github.com/mattn/go-colorable
-# github.com/mattn/go-isatty v0.0.11
+# github.com/mattn/go-isatty v0.0.12
+## explicit
 github.com/mattn/go-isatty
 # github.com/microcosm-cc/bluemonday v1.0.2
 github.com/microcosm-cc/bluemonday
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
 # github.com/qor/admin v0.0.0-20200315024928-877b98a68a6f
-## explicit
 github.com/qor/admin
 # github.com/qor/assetfs v0.0.0-20170713023933-ff57fdc13a14
 github.com/qor/assetfs
 # github.com/qor/middlewares v0.0.0-20170822143614-781378b69454
 github.com/qor/middlewares
 # github.com/qor/qor v0.0.0-20200224122013-457d2e3f50e1
-## explicit
 github.com/qor/qor
 github.com/qor/qor/resource
 github.com/qor/qor/utils
 # github.com/qor/responder v0.0.0-20171031032654-b6def473574f
 github.com/qor/responder
 # github.com/qor/roles v0.0.0-20171127035124-d6375609fe3e
-## explicit
 github.com/qor/roles
 # github.com/qor/session v0.0.0-20170907035918-8206b0adab70
 github.com/qor/session
@@ -183,7 +183,6 @@ github.com/ttacon/libphonenumber
 github.com/ttlv/common_utils
 github.com/ttlv/common_utils/health_checker
 github.com/ttlv/common_utils/logrus
-github.com/ttlv/common_utils/readonly
 github.com/ttlv/common_utils/testingtool
 github.com/ttlv/common_utils/utils
 # golang.org/x/net v0.0.0-20200520182314-0ba52f642ac2
@@ -285,5 +284,7 @@ google.golang.org/protobuf/types/descriptorpb
 google.golang.org/protobuf/types/known/anypb
 google.golang.org/protobuf/types/known/durationpb
 google.golang.org/protobuf/types/known/timestamppb
+# gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127
+## explicit
 # gopkg.in/yaml.v2 v2.3.0
 gopkg.in/yaml.v2

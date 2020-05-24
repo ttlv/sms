@@ -13,9 +13,8 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.0
 	github.com/jinzhu/configor v1.2.0
 	github.com/jinzhu/gorm v1.9.12
-	github.com/qor/admin v0.0.0-20200315024928-877b98a68a6f
-	github.com/qor/qor v0.0.0-20200224122013-457d2e3f50e1
-	github.com/qor/roles v0.0.0-20171127035124-d6375609fe3e
+	github.com/kr/pretty v0.1.0 // indirect
+	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/robfig/cron v1.2.0
 	github.com/rs/cors v1.7.0
 	github.com/sfreiberg/gotwilio v0.0.0-20200424172909-47a95c1c632a
@@ -28,4 +27,5 @@ require (
 	github.com/ttlv/common_utils v0.0.0-20200523040620-b3352dd2581f
 	golang.org/x/net v0.0.0-20200520182314-0ba52f642ac2
 	google.golang.org/grpc v1.29.1
+	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 )
