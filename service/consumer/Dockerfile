@@ -4,5 +4,5 @@ RUN apk --update upgrade && \
     apk add tzdata && \
     rm -rf /var/cache/apk/*
 
-ADD sms_consumer /bin/
-CMD /bin/sms_consumer
+ADD sms-consumer /bin/
+CMD /bin/sms-consumer

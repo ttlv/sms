@@ -1,9 +1,11 @@
 SHELL = /bin/bash
 
 build:
-	@GOOS=linux CGO_ENABLED=0 GOARCH=arm go build -o db-metrics main.go
-	@docker build -t gopherlv/db-metrics .
-	@rm db-metrics
+	@GOOS=linux CGO_ENABLED=0 GOARCH=arm go build -o sms-consumer main.go
+	@docker build -t gopherlv/sms-consumer .
+	@rm sms-consumer
 
 push: build
-	@docker push gopherlv/db-metrics:latest
+	@$(eval REV := $(shell git rev-parse HEAD|cut -c 1-8))
+	@docker tag gopherlv/sms-consumer gopherlv/sms_service:sms-consumer-$(REV)
+	@docker push gopherlv/sms_service:sms-consumer-$(REV)

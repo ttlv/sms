@@ -4,5 +4,5 @@ RUN apk --update upgrade && \
     apk add tzdata && \
     rm -rf /var/cache/apk/*
 
-ADD sms-webhook /bin/
-CMD /bin/sms-webhook
+ADD sms-http-server /bin/
+CMD /bin/sms-http-server

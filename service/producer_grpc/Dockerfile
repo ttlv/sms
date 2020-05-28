@@ -4,5 +4,5 @@ RUN apk --update upgrade && \
     apk add tzdata && \
     rm -rf /var/cache/apk/*
 
-ADD sms_producer /bin/
-CMD /bin/sms_producer
+ADD sms-grpc-server /bin/
+CMD /bin/sms-grpc-server
