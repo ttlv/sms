@@ -2,13 +2,14 @@ package test
 
 import (
 	"fmt"
-	"github.com/fatih/color"
-	"github.com/ttlv/sms"
 	"log"
 	"net/http"
 	"sync"
 	"testing"
 	"time"
+
+	"github.com/fatih/color"
+	"github.com/ttlv/sms"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/sessions"

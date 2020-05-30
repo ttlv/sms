@@ -99,7 +99,7 @@ type ChuangLanCallBack struct {
 
 type SmsAvailable struct {
 	ID              uint `gorm:"primary_key"`
-	SmsBranID       uint
+	SmsBrandID      uint
 	SmsBrand        SmsBrand `gorm:"foreignkey:SmsBranID"`
 	AvailableAmount int64
 	Note            string
