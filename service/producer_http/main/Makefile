@@ -1,7 +1,7 @@
 SHELL = /bin/bash
 
 build:
-	@GOOS=linux CGO_ENABLED=0 GOARCH=arm go build -o sms-http-server main.go
+	@GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -o sms-http-server main.go
 	@docker build -t gopherlv/sms-http-server .
 	@rm sms-http-server
 
