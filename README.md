@@ -96,16 +96,36 @@ please jump to https://github.com/ttlv/sms_admin to have a look.
 
 ### 1.  HTTP Headers
 
-#### Authorization:	XXXXXXXXXXXXXXXXX**(required)**
+#### Authorization
 
 ### 2. HTTP BODY
 
-#### 1. brand: XXXX**(required)**
+#### 1. brand
 
-#### 2. phone: XXXX**(required)**
+#### 2. phone
 
-#### 3. content: XXXX(required)
+#### 3. content
 
+# 5 example -- go version
 
+````go
+package main
 
+import (
+	"github.com/ttlv/common_utils/utils"
+)
+
+// please make sure you have valid brand and the number of sms more than zero
+
+func main() {
+	utils.Post("https://sms.xtv.im/send", map[string]string{
+		"brand":   "test",
+		"phone":   "8618000000000",
+		"content": "hello",
+	}, nil, map[string]string{
+		"Authorization": "Token token=123456",
+	})
+}
+
+````
 
