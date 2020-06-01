@@ -28,14 +28,16 @@ func New(db *gorm.DB, queue sms.SmsQueue, providers []sms.SmsProvider) (serv Sms
 }
 func (ser SmsServer) HttpSend(params *sms.SendParams) (err error) {
 	var (
-		number        string
-		brand         = sms.SmsBrand{}
-		availaleCount = common_utils.Count{}
-		availables    []sms.SmsAvailable
+		number             string
+		brand              = sms.SmsBrand{}
+		availaleCount      = common_utils.Count{}
+		availables         []sms.SmsAvailable
+		waitCallbackRecord = sms.SmsRecord{}
+		sentProviders      []string
+		countProvider      int
 	)
 	_, number, err = ser.parsePhoneNumber(params)
 	rawParamByte, _ := json.Marshal(params)
-	waitCallbackRecord := sms.SmsRecord{}
 	if err == nil {
 		// 再次判断短信的可用条数是否大于0
 		ser.DB.First(&brand, "name = ?", params.Brand)
@@ -51,12 +53,32 @@ func (ser SmsServer) HttpSend(params *sms.SendParams) (err error) {
 		}
 		ser.DB.Save(&smsRecord)
 		// 创建数据之后判断查找DB中是否存在着上一条是相同用户发送的短信数据，并且已经发送的短信在等到短信服务商的callback,如果存在,这次发送跳过上一条发送的运营商发送
-		ser.DB.Where("phone = ? AND state = ?", smsRecord.Phone, sms.RecordState_Success).Last(&waitCallbackRecord)
-		if !ser.DB.NewRecord(&waitCallbackRecord) {
-			ser.Queue.Publish(&sms.PublishData{SmsRecordId: smsRecord.ID, SendParams: params, SentProviders: []string{waitCallbackRecord.Sender}})
-		} else {
-			ser.Queue.Publish(&sms.PublishData{SmsRecordId: smsRecord.ID, SendParams: params})
+		// 如果当前provider只有一个,发送失败了还是会选择当前的provider继续发送
+		if brand.EnableAWS {
+			countProvider += 1
 		}
+		if brand.EnableChuangLan {
+			countProvider += 1
+		}
+		if brand.EnableEmay {
+			countProvider += 1
+		}
+		if brand.EnableTwilio {
+			countProvider += 1
+		}
+		if brand.EnableYunPian {
+			countProvider += 1
+		}
+		if countProvider == 0 {
+			return fmt.Errorf("该brand无可用的Provider")
+		}
+		if countProvider > 1 {
+			ser.DB.Where("phone = ? AND state = ?", smsRecord.Phone, sms.RecordState_Success).Last(&waitCallbackRecord)
+			if !ser.DB.NewRecord(&waitCallbackRecord) {
+				sentProviders = append(sentProviders, waitCallbackRecord.Sender)
+			}
+		}
+		ser.Queue.Publish(&sms.PublishData{SmsRecordId: smsRecord.ID, SendParams: params, SentProviders: sentProviders})
 		ser.DB.Find(&availables, "sms_brand_id = ? and available_amount > 0", brand.ID)
 		for index, available := range availables {
 			if index == 0 {

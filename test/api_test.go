@@ -56,10 +56,12 @@ func runSql() {
 		TRUNCATE TABLE sms_brands;
 		TRUNCATE TABLE sms_availables;
 		TRUNCATE TABLE sms_records;
+		TRUNCATE TABLE sms_settings;
 `)
 	utils.RunSQL(db, `
-		INSERT INTO sms_brands(name, token) VALUES ('test', "123456");
-		INSERT INTO sms_availables(sms_brand_id) VALUES (1)
+		INSERT INTO sms_brands(name, token, enable_aws) VALUES ('test', "123456", 1);
+		INSERT INTO sms_availables (sms_brand_id) VALUES (1)
+        INSERT INTO sms_settings (provider_sorts) VALUES ('Amazon')
 `)
 }
 
