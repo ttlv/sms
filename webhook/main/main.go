@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -24,6 +25,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("AMQPDial address is:", conf.AMQPDial)
 	if conn, err = amqp.Dial(conf.AMQPDial); err != nil {
 		panic(err)
 	}
