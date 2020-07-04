@@ -65,7 +65,7 @@ func (handler *Handlers) Send(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// 判断该brand是否还有可用的短信条数
-	handler.DB.Raw(`SELECT SUM(available_amount) AS value FROM sms_availables WHERE sms_brand_id = ?`, b.ID).Scan(&amount)
+	handler.DB.Debug().Raw(`SELECT SUM(available_amount) AS value FROM sms_availables WHERE sms_brand_id = ? AND available_amount > 0`, b.ID).Scan(&amount)
 	if amount.Value <= 0 {
 		helpers.RenderFailureJSON(w, 400, "您无可用的短信条数,请联系管理员充值.")
 		return
